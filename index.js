@@ -1,16 +1,16 @@
 const express = require("express");
 const { connectToMongoDB } = require("./connect");
 const urlRoute = require("./routes/url");
-
+const URL = require("./models/url");
 const cors = require('cors'); // Import the cors middleware
 
 
 const app = express();
 const PORT = 8001;
 
-// connectToMongoDB("mongodb://localhost:27017/short-url").then(() =>
-//   console.log("Mongodb connected")
-// );
+connectToMongoDB("mongodb://localhost:27017/short-url").then(() =>
+  console.log("Mongodb connected")
+);
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
