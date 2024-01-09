@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 // const { connectToMongoDB } = require("./connect");
 const urlRoute = require("./routes/url");
 const URL = require("./models/url");
 const cors = require("cors"); // Import the cors middleware
 
-
+const MONGO_URI = require("./config");
 const app = express();
-const PORT = 8001;
+const url = process.env.MONGO_URI;
 // mongodb://localhost:27017/
 // connectToMongoDB("mongodb+srv://tanyajs:9xWzg2ZX0wHKpNGy@cluster0.2qcvq6d.mongodb.net/short-url").then(() =>
 //   console.log("Mongodb connected")
@@ -16,13 +17,18 @@ const PORT = 8001;
 //   console.log("Mongodb connected")
 // );
 mongoose
-  .connect("mongodb://localhost:27017/short-urls", {
-    useNewUrlParser: true, 
+  .connect("mongodb+srv://Tanya:HXj0jueYvjLQjbrw@cluster0.vorcgtb.mongodb.net/Sortner?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
-    family: 4,
   })
-  .then(() => console.log("Database connected!"))
+  .then(() => {
+    console.log("MongoDB connected!");
+    // Call sendEmail function after successful MongoDB connection
+
+    // sendEmail();
+  })
   .catch((err) => console.log(err));
+
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
@@ -63,4 +69,5 @@ app.get("/:shortId", async (req, res) => {
   }
 });
 
+const PORT = 8001;
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
