@@ -7,8 +7,11 @@ const cors = require('cors'); // Import the cors middleware
 
 const app = express();
 const PORT = 8001;
-
-connectToMongoDB("mongodb+srv://tanyajs:9xWzg2ZX0wHKpNGy@cluster0.2qcvq6d.mongodb.net/short-url").then(() =>
+// mongodb://localhost:27017/
+// connectToMongoDB("mongodb+srv://tanyajs:9xWzg2ZX0wHKpNGy@cluster0.2qcvq6d.mongodb.net/short-url").then(() =>
+//   console.log("Mongodb connected")
+// );
+connectToMongoDB("mongodb://localhost:27017/short-urls").then(() =>
   console.log("Mongodb connected")
 );
 app.use(cors()); // Enable CORS for all routes
