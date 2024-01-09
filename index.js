@@ -1,9 +1,10 @@
 const express = require("express");
+const mongoose = require("mongoose");
 // const { connectToMongoDB } = require("./connect");
 const urlRoute = require("./routes/url");
 const URL = require("./models/url");
 const cors = require("cors"); // Import the cors middleware
-const mongoose = require("mongoose");
+
 
 const app = express();
 const PORT = 8001;
@@ -16,8 +17,9 @@ const PORT = 8001;
 // );
 mongoose
   .connect("mongodb://localhost:27017/short-urls", {
-    useNewUrlParser: true,
+    useNewUrlParser: true, 
     useUnifiedTopology: true,
+    family: 4,
   })
   .then(() => console.log("Database connected!"))
   .catch((err) => console.log(err));
